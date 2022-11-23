@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Slab">
+    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 2: Elokuvaoraakkeli</title>
+</head>
+
+<body>
+  
+  <div id="header">
+    <div id="otsikko"><h1>&#128302; Elokuvaoraakkeli </h1></div></div>
+    <div id="valikko">
+    <h3 id ="addDate">Ohjelmistossa </h3>
+    <button id='helsinkiArea'>Helsinki</button>
+    <button id='espooArea'>Espoo</button>
+    <button id='vantaaArea'>Vantaa</button>
+    <div class="dropdown">
+        <button id="pudotusvalikko" class="dropbtn">Muu Suomi</button>
+        <div id="myDropdown" class="dropdown-content">
+          
+          <a onclick="lataaElokuvat(1015)">Jyväskylä</a>
+          <a onclick="lataaElokuvat(1016)">Kuopio</a>
+          <a onclick="lataaElokuvat(1017)">Lahti</a>
+          <a onclick="lataaElokuvat(1041)">Lappeenranta</a>
+          <a onclick="lataaElokuvat(1018)">Oulu</a>
+          <a onclick="lataaElokuvat(1019)">Pori</a>
+          <a onclick="lataaElokuvat(1034)">Tampere: Cine Atlas</a>
+          <a onclick="lataaElokuvat(1035)">Tampere: Plevna</a>
+          <a onclick="lataaElokuvat(1022)">Turku</a>
+          <a onclick="lataaElokuvat(1046)">Raisio</a>
+<!---
+         <a id="1015">Jyväskylä</a>
+          <a id="1016">Kuopio</a>
+          <a id="1017">Lahti</a>
+          <a id="1041">Lappeenranta</a>
+          <a id="1018">Oulu</a>
+          <a id="1019">Pori</a>
+          <a id="1034">Tampere: Cine Atlas</a>
+          <a id="1035">Tampere: Plevna</a>
+          <a id="1022">Turku</a>
+          <a id="1046">Raisio</a>--->
+        </div>
+      </div>
+    </div>
+    
+
+  
+  <div id="ikkuna"></div>
+  
+
+
+<div id="lista">
+    
+    <ul id="elokuvalistaus">
+    </ul> </div>
+  
+</body>
+
+<script src="myscript.js"></script>
+
+</html>
