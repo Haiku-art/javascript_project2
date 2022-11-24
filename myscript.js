@@ -1,70 +1,25 @@
-//document.getElementById('1015').addEventListener('click', lataaElokuvat(1015));
- /*
- console.log(document.getElementById('10').textContent);
- document.getElementById('1015').addEventListener('click', klikkaus());
-
- function klikkaus(){
-  var url = 'https://www.finnkino.fi/xml/TheatreAreas/'
-  var tagName = 'Name'
-  var cityName = document.getElementById('10').textContent;
-  valitseTeatteri(url, tagName, cityName);
-
- }*/
-
- document.getElementById('pudotusvalikko').addEventListener('click', pudotusvalikko);
-
-function pudotusvalikko() { // Funktio on toteutettu W3Schoolin mallin mukaan: https://www.w3schools.com/howto/howto_js_dropdown.asp
-  document.getElementById("myDropdown").classList.toggle("show");
-  }
-
-  window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
-      }
-    }
-}
 
 
 var today = new Date();
 var dd = today.getDate(); //haetaan päivä. Lähde: https://www.w3schools.com/jsref/jsref_getdate.asp
-var mm = today.getMonth()+1; //Haetaan kuukaus, javascriptissä tammikuu on 0, siitä + 1. 
+var mm = today.getMonth()+1; //Haetaan kuukausi, javascriptissä tammikuu on 0, siitä + 1. 
 var yyyy = today.getFullYear();
 if(dd < 10) {
-    dd = '0' + dd
+    dd = '0' + dd //päivämäärän esittämistavan muotoilu. 
 }
 if(mm < 10) {
     mm = '0' + mm
 }
 today = dd + '.' + mm + '.' + yyyy; //päivämäärän esitysmuoto, jota käytetään myös Finnkinon XML-tiedostojen linkkien nimissä. 
 
-document.getElementById('addDate').innerHTML= "Ohjelmistossa " + today;
+document.getElementById('addDate').innerHTML= "Ohjelmistossa " + today; //lisätään elementtiin 'addDate'
 
-
-document.getElementById('helsinkiArea').addEventListener('click', helsinki);
+document.getElementById('helsinkiArea').addEventListener('click', helsinki); //Kuuntelijat 
 document.getElementById('espooArea').addEventListener('click', espoo);
 document.getElementById('vantaaArea').addEventListener('click', vantaa);
-//document.getElementById('muuSuomi').addEventListener('click', muuSuomi);
 
-//document.getElementById('1015').addEventListener('click', lataaElokuvat2(1015));
 
-/*  <a id="1015">Jyväskylä</a>
-          <a id="1016">Kuopio</a>
-          <a id="1017">Lahti</a>
-          <a id="1041">Lappeenranta</a>
-          <a id="1018">Oulu</a>
-          <a id="1019">Pori</a>
-          <a id="1034">Tampere: Cine Atlas</a>
-          <a id="1035">Tampere: Plevna</a>
-          <a id="1022">Turku</a>
-          <a id="1046">Raisio</a>*/
-
-function helsinki(){
+function helsinki(){ // Jokaisella kapungilla on oma funtio, joka välittää tietoja parametreinä ja kutsuu sitten valitseTeateri -funktiota
   var url = 'https://www.finnkino.fi/xml/TheatreAreas/'
   var tagName = 'Name'
   var cityName = 'Helsinki:'
@@ -92,13 +47,33 @@ function muuSuomi(){
 
 }
 
-//------------------------------------------------------------------------------------------------------------------
-// LUODAAN TEATTEREIDEN VALIKKONAPPULAT XML -URL:N, TAG NAME:N JA KAUPUNGIN NIMEN MUKAAN 
-//------------------------------------------------------------------------------------------------------------------
+
+document.getElementById('pudotusvalikko').addEventListener('click', pudotusvalikko); // Pudotuvalikon kuuntelija
+
+function pudotusvalikko() { // Funktio on toteutettu W3Schoolin mallin mukaan: https://www.w3schools.com/howto/howto_js_dropdown.asp
+  document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------
+// LUODAAN TEATTEREIDEN VALIKKONAPPULAT PARAMETRIEN MUKAAN (xml-url, tag name xml -hakua varten ja kaupungin nimi IF-rakennetta varten)
+//------------------------------------------------------------------------------------------------------------------------------------
 
 function valitseTeatteri(url, tagName, cityName){
 
-var xmlhttp = new XMLHttpRequest();
+var xmlhttp = new XMLHttpRequest(); // lähetetään http -pyyntö. (XMLHttpRequest-olio). Tämän pohjalla käytetty kurssimateriaalia ja demoja. 
  xmlhttp.open("GET", url, true);
  xmlhttp.send();
 
@@ -109,47 +84,44 @@ if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
   let xml = xmlhttp.responseXML;
   let x = xml.getElementsByTagName(tagName);
   let id = xml.getElementsByTagName('ID');
-  let y = cityName
-
     
     var sijainti = document.getElementById('ikkuna');
-    sijainti.innerHTML = "";
+    sijainti.innerHTML = ""; //tyhjennetään elementin sisältö, jotta toimii oikein, kun funtiota kutsutaan uudelleen. 
     sijainti.appendChild(document.createTextNode('Valitse teatteri:'));
     sijainti.appendChild(document.createElement("br"));
 
 for(i = 0; i < x.length; i++) {
   let kaupungit = x[i].innerHTML
-  if (kaupungit.includes(cityName)){
+  if (kaupungit.includes(cityName)){ // jos taulukosta löytyy parametrillä saatu kaupungin nimi (esim. Helsinki:), luodaan uusi button. 
     var idd = id[i].childNodes[0].nodeValue;
    
-    createButton(idd); // https://stackoverflow.com/questions/7066191/javascript-onclick-onsubmit-for-dynamically-created-button
+    createButton(idd); // Luodaan button dynaamisesti onclick -toiminnaallisuudella. Lähteenä: https://stackoverflow.com/questions/7066191/javascript-onclick-onsubmit-for-dynamically-created-button
     function createButton(idd) {
 
             var btn = document.createElement("BUTTON");
-            btn.innerHTML = x[i].childNodes[0].nodeValue;
+            btn.innerHTML = x[i].childNodes[0].nodeValue; //haetaan tekstiksi arvo taulukosta
            
             btn.setAttribute("id", "butt");
             document.body.appendChild(btn);
             sijainti.appendChild(btn);
         
             btn.onclick = function() {
-                lataaElokuvat(idd);
-                console.log(idd);
+                lataaElokuvat(idd); // toiminnallisuus oli lisättävä anonyymiin functioon. Jos sen laittoi menetelmällä "setAttribute", javascript ajoi funktiot väkisin ja aiheutti kaaosta. 
+                console.log(idd); // addEventlistner ei myöskään toimi, sillä buttonit luodaan vain jos funktiota on kutsuttu. 
             };
-            
         }
-}
-}
+      }
+    }
     }
   }
 }
 //------------------------------------------------------------------------------------------------------------------
-// HAETAAN ELOKUVIEN TIEDOT XML -TIEDOSTOISTA ID:N JA PÄIVÄMÄÄRÄN MUKAAN
+// HAETAAN ELOKUVIEN TIEDOT XML -TIEDOSTOISTA ID:N JA PÄIVÄMÄÄRÄN MUKAAN JA LUODAAN NIILLE SIISTI ESITYSTAPA
 //------------------------------------------------------------------------------------------------------------------
 
 function lataaElokuvat(idd){
     
-    var url = "https://www.finnkino.fi/xml/Schedule/?area=" + idd + "&dt=" + today; // tallennetaan muuttujaan url + teatterin ID, + ""&dt="" ja päivämäärä, että saadaan kokonainen osoite, josta XML haetaan. 
+    var url = "http://www.finnkino.fi/xml/Schedule/?area=" + idd + "&dt=" + today; // tallennetaan muuttujaan url + teatterin ID, + ""&dt="" ja päivämäärä, että saadaan kokonainen osoite, josta XML haetaan. 
     var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
@@ -160,36 +132,30 @@ function lataaElokuvat(idd){
                 var x = xmlDoc.getElementsByTagName("Show");
                 var TheatreID = xmlDoc.getElementsByTagName("TheatreID");
                 var ShowStart = xmlDoc.getElementsByTagName("dttmShowStart");
-                //var EventURL = xmlDoc.getElementsByTagName("EventURL");
-                var eventID = "";
-                var EventURL = "";
-                var TheatreAuditorium = "";
-                var LengthInMinutes = "";
-                var dttmShowStart = "";
-                var Genres = "";
-
-                var lista="";
+                var Theatre = xmlDoc.getElementsByTagName("Theatre");
+                var eventID, EventURL, TheatreAuditorium, LengthInMinutes, dttmShowStart, Genres = "";
+             
+                var Theatre = Theatre[0].innerHTML;
+               
                 var ul = document.getElementById("elokuvalistaus");
                 ul.innerHTML = "";
 
+                document.getElementById('teatteri').innerHTML = Theatre;
+
                 for (i = 0; i <x.length; i++) {
                     
-                   // let y = idd
                     let id = TheatreID[i].innerHTML
                     
-                   
-                   // if (id.includes(y)){ // tarkistetaan, mätsääkö teatterin id parametrinä saatuun teatterin id:seen
-
-                        //tallennetaan kaikki tarvittavat Event-id:llä löydetyt tiedot XML taulukosta muuttujiin
+                        //tallennetaan kaikki myöhemmin tarvittavat tiedot XML taulukosta muuttujiin
                         eventID = x[i].getElementsByTagName("EventID")[0].childNodes[0].nodeValue;
                         TheatreAuditorium = x[i].getElementsByTagName("TheatreAuditorium")[0].childNodes[0].nodeValue;
                         LengthInMinutes = x[i].getElementsByTagName("LengthInMinutes")[0].childNodes[0].nodeValue;
                         dttmShowStart =  x[i].getElementsByTagName("dttmShowStart")[0].childNodes[0].nodeValue;
                         EventURL = x[i].getElementsByTagName("ShowURL")[0].childNodes[0].nodeValue;
                         Genres = x[i].getElementsByTagName("Genres")[0].childNodes[0].nodeValue;
-                        //console.log(Genres);
 
-                        //luodaan taulukko, rivi ja solut 
+
+                        //luodaan esitystapaa varten taulukko, rivi ja solut 
                         var table2 = document.createElement('table');
                         var row = document.createElement("tr");
                         var cell = document.createElement("td");
@@ -282,68 +248,3 @@ function lataaElokuvat(idd){
    
     }
     
-
-/*
-function lataaElokuvat(idd){ 
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "http://www.finnkino.fi/xml/Schedule/?area=" + idd + "&dt=" + today ,true); 
-        xmlhttp.send();
-
-        xmlhttp.onreadystatechange=function() { 
-            if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-                var xmlDoc = xmlhttp.responseXML;
-                var x = xmlDoc.getElementsByTagName("Show");
-                var TheatreID = xmlDoc.getElementsByTagName("TheatreID");
-                var ShowStart = xmlDoc.getElementsByTagName("dttmShowStart");
-
-                lista = ""
-                var eventID = ""
-
-                var ul = document.getElementById("elokuvalistaus");
-                ul.innerHTML = "";
-
-                for (i = 0; i <x.length; i++) {
-                    let y = idd
-                    let id = TheatreID[i].innerHTML
-                  
-                   
-                   // if (id.includes(y)){
-
-                        eventID = x[i].getElementsByTagName("EventID")[0].childNodes[0].nodeValue;
-
-                        var lii = document.createElement('ul');
-                        var kuva = x[i].getElementsByTagName("EventMediumImagePortrait")[0].childNodes[0].nodeValue
-                        var image = document.createElement("img");
-                        image.setAttribute("src", kuva);
-                        lii.appendChild(image);
-                        ul.appendChild(lii);
-
-                        var li = document.createElement('li');
-                        li.setAttribute('id', 'li2');
-                        var nimet = x[i].getElementsByTagName("Title")[0].childNodes[0].nodeValue;
-                        li.appendChild(document.createTextNode(nimet));
-                        ul.appendChild(li);
-
-                        var liii = document.createElement('li');
-                        var lisatietojaNappi = luoNappi(); 
-                        liii.appendChild(lisatietojaNappi);
-                        ul.appendChild(liii);
-                       
-                            
-                        function luoNappi(){
-                            eventID = x[i].getElementsByTagName("EventID")[0].childNodes[0].nodeValue;
-                            var button = document.createElement("BUTTON");
-                            button.innerHTML =  'Lisätietoja';
-                            button.setAttribute("id","btnid" + eventID);
-                            return button;
-                    }
-                }  
-            }
-            
-        }
-    }
-*/
-//}
-    
-
-//} 
