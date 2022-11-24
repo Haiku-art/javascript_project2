@@ -121,7 +121,7 @@ for(i = 0; i < x.length; i++) {
 
 function lataaElokuvat(idd){
     
-    var url = "http://www.finnkino.fi/xml/Schedule/?area=" + idd + "&dt=" + today; // tallennetaan muuttujaan url + teatterin ID, + ""&dt="" ja päivämäärä, että saadaan kokonainen osoite, josta XML haetaan. 
+    var url = "https://www.finnkino.fi/xml/Schedule/?area=" + idd + "&dt=" + today; // tallennetaan muuttujaan url + teatterin ID, + ""&dt="" ja päivämäärä, että saadaan kokonainen osoite, josta XML haetaan. 
     var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
