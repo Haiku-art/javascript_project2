@@ -18,7 +18,12 @@
     <button id='helsinkiArea'>Helsinki</button>
     <button id='espooArea'>Espoo</button>
     <button id='vantaaArea'>Vantaa</button>
-    <div class="dropdown">
+
+    <!--Dropdown menuun on ohjeiden vastaisesti kovakoodattu kuuntelijat. 
+      Tämä oli viimehetken tietoinen kosmeettinen lisäys, ja todellinen, tehtävää varten toteutettu toiminnallisuus 
+      on dynaamisesti luotavat buttonit Helsingin, Espoon ja Vantaan teattereille.--->
+
+    <div class="dropdown"> 
         <button id="pudotusvalikko" class="dropbtn">Muu Suomi</button>
         <div id="myDropdown" class="dropdown-content">
           
@@ -32,29 +37,16 @@
           <a onclick="lataaElokuvat(1035)">Tampere: Plevna</a>
           <a onclick="lataaElokuvat(1022)">Turku</a>
           <a onclick="lataaElokuvat(1046)">Raisio</a>
-<!---
-         <a id="1015">Jyväskylä</a>
-          <a id="1016">Kuopio</a>
-          <a id="1017">Lahti</a>
-          <a id="1041">Lappeenranta</a>
-          <a id="1018">Oulu</a>
-          <a id="1019">Pori</a>
-          <a id="1034">Tampere: Cine Atlas</a>
-          <a id="1035">Tampere: Plevna</a>
-          <a id="1022">Turku</a>
-          <a id="1046">Raisio</a>--->
+
         </div>
       </div>
     </div>
-    
 
   
   <div id="ikkuna"></div>
-  
-
 
 <div id="lista">
-    
+    <div id="teatteri"></div>
     <ul id="elokuvalistaus">
     </ul> </div>
   
