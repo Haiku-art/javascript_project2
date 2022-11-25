@@ -2,7 +2,7 @@
 
 var today = new Date();
 var dd = today.getDate(); //haetaan päivä. Lähde: https://www.w3schools.com/jsref/jsref_getdate.asp
-var mm = today.getMonth()+1; //Haetaan kuukausi, javascriptissä tammikuu on 0, siitä + 1. 
+var mm = today.getMonth() + 1; //Haetaan kuukausi, javascriptissä tammikuu on 0, siitä + 1. 
 var yyyy = today.getFullYear();
 if(dd < 10) {
     dd = '0' + dd //päivämäärän esittämistavan muotoilu. 
@@ -197,8 +197,8 @@ function lataaElokuvat(idd){
                         oikeeToka.appendChild(document.createTextNode(' ' + TheatreAuditorium));
                         oikeeToka.appendChild(document.createElement("br"));
 
-                        var klo = dttmShowStart.slice(-8); //lähde?
-                        var aika = klo.slice(0,-3);
+                        var klo = dttmShowStart.slice(-8); //Kellonajan muotoilu: napataan mukaan vikat 8 merkkiä
+                        var aika = klo.slice(0,-3); // poistetaan viimeiset nollat
                         oikeeToka.appendChild(document.createTextNode("Showtime: " + aika));
                         cell2.appendChild(oikeeToka);
 
@@ -219,32 +219,32 @@ function lataaElokuvat(idd){
 
     function lisaaEmoji(genres){ // saa parametrinä genret, käy ne läpi ja lisää muuttujiin emojeja sitä mukaan, jos vastaava string-arvo löytyy. 
 
-        var e1, e2,e3,e4,e5,e6 = "";
+        var e1,e2,e3,e4,e5,e6 = "";
         console.log(genres);
         if (genres.includes('Komedia')){e1 = '😁'}
           else{e1 = ""} //jos genreä ei löydy, jätetään se tyhjäksi. 
         if (genres.includes('Draama')){e2 = '🎭';}
-        else{e2 = ""}
+          else{e2 = ""}
         if (genres.includes('Animaatio')){e3 = '🎨';}
-        else{e3 = ""}
+          else{e3 = ""}
         if (genres.includes('Jännitys')){e4 = '💀';}
-        else{e4 = ""}
+          else{e4 = ""}
         if (genres.includes('Kauhu')){e5 = '👻';}
-        else{e5 = ""}
+          else{e5 = ""}
         if (genres.includes('Sci-fi')){e6 = '🛸';}
-        else{e6 = ""}
+          else{e6 = ""}
         if (genres.includes('Toiminta')){e7 = '💥';}
-        else{e7 = ""}
+          else{e7 = ""}
         if (genres.includes('Fantasia')){e9 = '🧝';}
-        else{e9 = ""}
+          else{e9 = ""}
         if (genres.includes('Perhe')){e10 = '👪';}
-        else{e10 = ""}
+          else{e10 = ""}
         if (genres.includes('Seikkailu')){e11 = '🏹';}
-        else{e11 = ""}
+          else{e11 = ""}
         
 
         var emojit = e1 +" "+ e2 +" "+ e3 + " "+ e4 +" "+ e5+" "+ e6 + " " + e7+ " " + e9 + " " + e10+" "+ e11;
-        return emojit; //emojin lähetetään paluuarvona. 
+        return emojit; //emojit lähetetään paluuarvona. 
    
     }
     
