@@ -38,32 +38,60 @@ function vantaa(){
   var cityName = 'Vantaa'
   valitseTeatteri(url, tagName, cityName)
 }
-function muuSuomi(){
-    var url = 'https://www.finnkino.fi/xml/TheatreAreas/'
-    var tagName = 'Name'
-    var cityName = 'Vantaa'
-  valitseTeatteri(url, tagName, cityName)
-
-
-}
 
 
 document.getElementById('pudotusvalikko').addEventListener('click', pudotusvalikko); // Pudotuvalikon kuuntelija
 
-function pudotusvalikko() { // Funktio on toteutettu W3Schoolin mallin mukaan: https://www.w3schools.com/howto/howto_js_dropdown.asp
+function pudotusvalikko() { // Funktio ja pudotusvalikon muotoilu on toteutettu W3Schoolin mallin mukaan: https://www.w3schools.com/howto/howto_js_dropdown.asp
   document.getElementById("myDropdown").classList.toggle("show");
   }
-
+  
   window.onclick = function(event) {
+
     if (!event.target.matches('.dropbtn')) {
       var dropdowns = document.getElementsByClassName("dropdown-content");
       var i;
+      var x = event.target.innerHTML; //tallentaa targetin muuttujaan
+
+      if (x == 'Jyväskylä' ){ //verrataan x:n arvoa stringiin, ja sen perusteella kutsutaan lataaElokuvat - funktiota.
+        lataaElokuvat(1015);
+      }
+      else if (x == 'Kuopio' ){
+        lataaElokuvat(1016);
+      }
+      else if (x == 'Lahti' ){
+        lataaElokuvat(1017);
+      }
+      else if (x == 'Lappeenranta' ){
+        lataaElokuvat(1041);
+      }
+      else if (x == 'Oulu' ){
+        lataaElokuvat(1018);
+      }
+      else if (x == 'Pori' ){
+        lataaElokuvat(1019);
+      }
+      else if (x == 'Tampere: Cine Atlas' ){
+        lataaElokuvat(1034);
+      }
+      else if (x == 'Tampere: Plevna' ){
+        lataaElokuvat(1035);
+      }
+      else if (x == 'Turku' ){
+        lataaElokuvat(1022);
+      }
+      else if (x == 'Raisio' ){
+        lataaElokuvat(1046);
+      }
+
+
       for (i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];
         if (openDropdown.classList.contains('show')) {
           openDropdown.classList.remove('show');
         }
       }
+      
     }
 }
 
